@@ -30,9 +30,9 @@ public class ClientMain {
                     break;
                 }else if(subSplitCommand.length > 1 && subSplitCommand[0].equalsIgnoreCase("add")){
                     String currentDate = getCurrentDate();
-                    int amount = Integer.parseInt(subSplitCommand[2]);
+                    int sum = Integer.parseInt(subSplitCommand[2]);
 
-                    out.println("{\"title\": \""+ subSplitCommand[1] +"\", \"date\": \"" + currentDate + "\", \"sum\": " + amount + "}");
+                    out.println("{\"title\": \""+ subSplitCommand[1] +"\", \"date\": \"" + currentDate + "\", \"sum\": " + sum + "}");
                     System.out.println("Данные переданы на сервер.");
 
                     System.out.println("Ответ от сервера:");

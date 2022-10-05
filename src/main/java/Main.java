@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+import jsonData.JsonProductData;
 import product.ProductsTracker;
 
 import java.io.BufferedReader;
@@ -17,19 +19,23 @@ public class Main {
                 try (
                         Socket socket = serverSocket.accept();
                         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                        PrintWriter out = new PrintWriter(socket.getOutputStream());
+                        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 ) {
-                    // обработка одного подключения
+                    // Обработка одного подключения
                     String inString = in.readLine();
 
-                    // TODO: Сформировать JSON из строки и добавить данные в ProductTracer
+                    // Формируем JSON из строки и добавляем данные в ProductTracer
+                    Gson gson = new Gson();
+                    JsonProductData jsonProductData = gson.fromJson(inString, JsonProductData.class);
+                    productsTracker.addNewProduct(jsonProductData);
 
-                    out.println("{" +
-                            "  \"maxCategory\": {" +
-                            "    \"category\": \"еда\"," +
-                            "    \"sum\": 350000" +
-                            "  }" +
-                            "}");
+                    // Подготовка json для клиента, ответ на запрос
+                    String outJsonData = productsTracker.getJsonSumForCategoryByProductName(jsonProductData.title);
+
+                    System.out.println("Сформированный json для клиента: ");
+                    System.out.println(outJsonData);
+
+                    out.println(outJsonData);
                 }
             }
         } catch (IOException e) {
