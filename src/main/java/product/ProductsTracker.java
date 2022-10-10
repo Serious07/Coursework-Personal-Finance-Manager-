@@ -6,11 +6,13 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class ProductsTracker {
-    private Map trackedProducts = new HashMap<String, ProductsCategory>();
+    private Map<String, ProductsCategory> trackedProducts = new HashMap();
     // Key - Название товара Value - Категория
-    private Map hashProducts = new HashMap<String, String>();
+    private Map<String, String> hashProducts = new HashMap();
 
     private static String template = "булка\tеда\n" +
             "колбаса\tеда\n" +
@@ -64,6 +66,20 @@ public class ProductsTracker {
         }
     }
 
+    public ProductsCategory getCategoryWithHighestSum(){
+        int maxSum = -1;
+        ProductsCategory result = null;
+
+        for (Map.Entry<String, ProductsCategory> entry : trackedProducts.entrySet()){
+            if (entry.getValue().getSum() > maxSum){
+                maxSum = entry.getValue().getSum();
+                result = entry.getValue();
+            }
+        }
+
+        return result;
+    }
+
     public void addNewProduct(JsonProductData product){
         // Продукт содержится в существующих категориях
         if(hashProducts.containsKey(product.title)){
@@ -86,7 +102,7 @@ public class ProductsTracker {
     }
 
     public String getJsonSumForCategoryByProductName(String productName){
-        ProductsCategory productsCategory = (ProductsCategory) trackedProducts.get(hashProducts.get(productName));
+        ProductsCategory productsCategory = getCategoryWithHighestSum();
 
         return "{" +
                 "  \"maxCategory\": {" +
