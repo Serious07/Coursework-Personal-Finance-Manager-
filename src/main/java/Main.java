@@ -16,6 +16,7 @@ public class Main {
 
             ProductsTracker productsTracker = new ProductsTracker();
             while (true) { // в цикле(!) принимаем подключения
+                System.out.println("Сервер ожидает подключение от клиента");
                 try (
                         Socket socket = serverSocket.accept();
                         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
