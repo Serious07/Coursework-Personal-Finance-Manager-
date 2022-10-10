@@ -31,7 +31,7 @@ public class Main {
                     productsTracker.addNewProduct(jsonProductData);
 
                     // Подготовка json для клиента, ответ на запрос
-                    String outJsonData = productsTracker.getJsonSumForCategoryByProductName(jsonProductData.title);
+                    String outJsonData = productsTracker.getJsonMaxSumForCategoryes();
 
                     System.out.println("Сформированный json для клиента: ");
                     System.out.println(outJsonData);

@@ -6,8 +6,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 public class ProductsTracker {
     private Map<String, ProductsCategory> trackedProducts = new HashMap();
@@ -101,7 +99,7 @@ public class ProductsTracker {
         System.out.println("Товар " + product.title + " занесён в категорию " + hashProducts.get(product.title) + " на сумму: " + product.sum);
     }
 
-    public String getJsonSumForCategoryByProductName(String productName){
+    public String getJsonMaxSumForCategoryes(){
         ProductsCategory productsCategory = getCategoryWithHighestSum();
 
         return "{" +

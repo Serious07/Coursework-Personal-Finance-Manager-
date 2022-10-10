@@ -1,8 +1,6 @@
 import com.google.gson.Gson;
 import jsonData.JsonProductData;
-import net.jodah.failsafe.internal.util.Assert;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import product.ProductsTracker;
@@ -54,7 +52,7 @@ public class ProductTrackerTests {
                 "    \"category\": \"одежда\"," +
                 "    \"sum\": \"1100\"" +
                 "  }" +
-                "}", productsTracker.getJsonSumForCategoryByProductName(""));
+                "}", productsTracker.getJsonMaxSumForCategoryes());
     }
 
     private static String getCurrentDate(){
